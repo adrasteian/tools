@@ -156,8 +156,6 @@ def processtree(treename, subgraphs, phase):
 	if phase==0:
   		dotfile.write("gv_dl_" + filteredName(treename,'') + ' [label=< <b>' + treename + '</b> >, shape=box]\n')
 
-	#skipsegs = ["merged", "intermediates", "generated" ]
-
 	skipdirs = args.skipdirs
 	skipfiles = args.skipfiles
 	skipsegs = args.skipsegs
@@ -170,20 +168,11 @@ def processtree(treename, subgraphs, phase):
 		if args.depth>0 and len(segments)>args.depth:
 			continue
 
-		skip = False
-		for skipdir in skipdirs:
-			if path.startswith(skipdir):
-				skip = True
-				#print '...skipping (<'+skipdir+'>)'
-				break
-		if skip:
-			continue
-
-		processfiles = True
 
 		#	Don't show folders in paths that have dotted segments unless
 		#	option to "unhide" them has been provided...
 
+		processfiles = True
 		for segment in segments:
 
 			if not args.unhide and segment.startswith("."):
@@ -201,6 +190,23 @@ def processtree(treename, subgraphs, phase):
 					continue
 
 				if dname in skipsegs:
+					continue
+
+				dpath = os.path.join(path,dname)
+				skip = False
+				for skipdir in skipdirs:
+					if dpath==skipdir and args.retaintopdirs:
+						# dpath is the top-level folder to be skipped but command line
+						# option to retain the top-level folder in the final graph has
+						# been specified so allow this one into the graph...
+						break
+					elif dpath.startswith(skipdir):
+						# ...below a folder in the skipdirs list so don't let it into
+						# the graph...
+						skip = True
+						#print '...skipping (<'+skipdir+'>)'
+						break
+				if skip:
 					continue
 
 				# If sub-graphs have been provided iterate the list and determine if
@@ -261,7 +267,7 @@ def processtree(treename, subgraphs, phase):
 					if skip:
 						continue
 
-					# ...similarly sub-graphs have been provided iterate the list and
+					# ...similarly sub-graphs have been provided so iterate the list and
 					# determine if this file lies within the top-level subgraph folder. If we are
 					# building main folder/file graph (phase<2) then skip this folder.
 					# If we are building subgraphs (phase>1) then process the folder as
@@ -319,6 +325,7 @@ def check_parameters(argv):
 	parser.add_argument(	  '--pinksubgraphs',	type=str, required=False, help='Comma separated list of subgraphs with pink background')
 	parser.add_argument(	  '--redsubgraphs',	type=str, required=False, help='Comma separated list of subgraphs with red background')
 	parser.add_argument('-r', '--redfiles',		type=str, required=False, help='Highlight files in comma separated list with red ellipse')
+	parser.add_argument(      '--retaintopdirs',	default=False, action="store_true", help='Retain top-level folders nominated for skipping')
 	parser.add_argument('-s', '--size',			default=False, action="store_true", help='Show file size')
 	parser.add_argument(      '--skipdirs', 	type=str, required=False,  help='Exclude folders if path starts with any of comma separated list')
 	parser.add_argument(      '--skipfiles', 	type=str, required=False,  help='Exclude files')
