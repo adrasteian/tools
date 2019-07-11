@@ -1,0 +1,97 @@
+digraph tree {
+    graph [fontname = "helvetica"]
+    node [fontname = "helvetica"]
+    edge [fontname = "helvetica"]
+    rankdir=LR;
+// path: <tools> name: <> fqn: <tools>
+// hex: <4a931512ce65bdc9ca6808adf92d8783>
+gv_dl_4a931512ce65bdc9ca6808adf92d8783 [label=< <b>tools</b> >, shape=box]
+// path: <tools> name: <tree2dot> fqn: <tools/tree2dot>
+// hex: <8273e4edcbdbad61e4cb88a2d70d824d>
+gv_d_8273e4edcbdbad61e4cb88a2d70d824d [shape=point]
+gv_dl_8273e4edcbdbad61e4cb88a2d70d824d[label=< <b>tree2dot</b> >, shape=folder, fillcolor=gold2, style=filled]
+gv_d_8273e4edcbdbad61e4cb88a2d70d824d -> gv_dl_8273e4edcbdbad61e4cb88a2d70d824d
+
+// path: <tools> name: <LICENSE> fqn: <tools/LICENSE>
+// hex: <7f1d75c1c71bb3662229f57f9043ec19>
+gv_f_7f1d75c1c71bb3662229f57f9043ec19 [shape=point]
+gv_fl_7f1d75c1c71bb3662229f57f9043ec19[label=< <b>LICENSE</b> >, shape=ellipse, color=green, fontcolor=black]
+gv_f_7f1d75c1c71bb3662229f57f9043ec19 -> gv_fl_7f1d75c1c71bb3662229f57f9043ec19
+
+// path: <tools/tree2dot> name: <src> fqn: <tools/tree2dot/src>
+// hex: <0b8510be0d183ffe269d67e8591850d6>
+gv_d_0b8510be0d183ffe269d67e8591850d6 [shape=point]
+gv_dl_0b8510be0d183ffe269d67e8591850d6[label=< <b>src</b> >, shape=folder, fillcolor=gold2, style=filled]
+gv_d_0b8510be0d183ffe269d67e8591850d6 -> gv_dl_0b8510be0d183ffe269d67e8591850d6
+
+// path: <tools/tree2dot/src> name: <code> fqn: <tools/tree2dot/src/code>
+// hex: <810f73e4b7579a5d6072b04766c29014>
+gv_d_810f73e4b7579a5d6072b04766c29014 [shape=point]
+gv_dl_810f73e4b7579a5d6072b04766c29014[label=< <b>code</b> >, shape=folder, fillcolor=gold2, style=filled]
+gv_d_810f73e4b7579a5d6072b04766c29014 -> gv_dl_810f73e4b7579a5d6072b04766c29014
+
+// path: <tools/tree2dot/src/code> name: <tree2dot> fqn: <tools/tree2dot/src/code/tree2dot>
+// hex: <4b246943ed475e1a835da37420a92f12>
+gv_d_4b246943ed475e1a835da37420a92f12 [shape=point]
+gv_dl_4b246943ed475e1a835da37420a92f12[label=< <b>tree2dot</b> >, shape=folder, fillcolor=gold2, style=filled]
+gv_d_4b246943ed475e1a835da37420a92f12 -> gv_dl_4b246943ed475e1a835da37420a92f12
+
+// path: <tools/tree2dot/src/code/tree2dot> name: <tree2dot.py> fqn: <tools/tree2dot/src/code/tree2dot/tree2dot.py>
+// hex: <584bd4bc6d301efa1b2e08400f47a374>
+gv_f_584bd4bc6d301efa1b2e08400f47a374 [shape=point]
+gv_fl_584bd4bc6d301efa1b2e08400f47a374[label=< <b>tree2dot.py</b> >, shape=ellipse, color=green, fontcolor=black]
+gv_f_584bd4bc6d301efa1b2e08400f47a374 -> gv_fl_584bd4bc6d301efa1b2e08400f47a374
+
+// path: <tools> name: <tree2dot> fqn: <tools/tree2dot>
+// hex: <8273e4edcbdbad61e4cb88a2d70d824d>
+// path: <tools> name: <LICENSE> fqn: <tools/LICENSE>
+// hex: <7f1d75c1c71bb3662229f57f9043ec19>
+    // path: <tools>
+    {
+    rank=same;
+// path: <> name: <tools> fqn: <tools>
+// hex: <4a931512ce65bdc9ca6808adf92d8783>
+    gv_dl_4a931512ce65bdc9ca6808adf92d8783 -> gv_d_8273e4edcbdbad61e4cb88a2d70d824d -> gv_f_7f1d75c1c71bb3662229f57f9043ec19 [arrowhead=none]
+    }
+
+// path: <tools/tree2dot> name: <src> fqn: <tools/tree2dot/src>
+// hex: <0b8510be0d183ffe269d67e8591850d6>
+    // path: <tools/tree2dot>
+    {
+    rank=same;
+// path: <tools> name: <tree2dot> fqn: <tools/tree2dot>
+// hex: <8273e4edcbdbad61e4cb88a2d70d824d>
+    gv_dl_8273e4edcbdbad61e4cb88a2d70d824d -> gv_d_0b8510be0d183ffe269d67e8591850d6 [arrowhead=none]
+    }
+
+// path: <tools/tree2dot/src> name: <code> fqn: <tools/tree2dot/src/code>
+// hex: <810f73e4b7579a5d6072b04766c29014>
+    // path: <tools/tree2dot/src>
+    {
+    rank=same;
+// path: <tools/tree2dot> name: <src> fqn: <tools/tree2dot/src>
+// hex: <0b8510be0d183ffe269d67e8591850d6>
+    gv_dl_0b8510be0d183ffe269d67e8591850d6 -> gv_d_810f73e4b7579a5d6072b04766c29014 [arrowhead=none]
+    }
+
+// path: <tools/tree2dot/src/code> name: <tree2dot> fqn: <tools/tree2dot/src/code/tree2dot>
+// hex: <4b246943ed475e1a835da37420a92f12>
+    // path: <tools/tree2dot/src/code>
+    {
+    rank=same;
+// path: <tools/tree2dot/src> name: <code> fqn: <tools/tree2dot/src/code>
+// hex: <810f73e4b7579a5d6072b04766c29014>
+    gv_dl_810f73e4b7579a5d6072b04766c29014 -> gv_d_4b246943ed475e1a835da37420a92f12 [arrowhead=none]
+    }
+
+// path: <tools/tree2dot/src/code/tree2dot> name: <tree2dot.py> fqn: <tools/tree2dot/src/code/tree2dot/tree2dot.py>
+// hex: <584bd4bc6d301efa1b2e08400f47a374>
+    // path: <tools/tree2dot/src/code/tree2dot>
+    {
+    rank=same;
+// path: <tools/tree2dot/src/code> name: <tree2dot> fqn: <tools/tree2dot/src/code/tree2dot>
+// hex: <4b246943ed475e1a835da37420a92f12>
+    gv_dl_4b246943ed475e1a835da37420a92f12 -> gv_f_584bd4bc6d301efa1b2e08400f47a374 [arrowhead=none]
+    }
+
+}

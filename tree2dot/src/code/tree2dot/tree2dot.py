@@ -179,7 +179,7 @@ def processtree(treename, subgraphs, phase):
 				processfiles = False
 				break
 
-			if segment in skipsegs:
+			if not skipsegs==None and segment in skipsegs:
 				processfiles = False
 				break
 
@@ -189,25 +189,26 @@ def processtree(treename, subgraphs, phase):
 				if not args.unhide and dname.startswith("."):
 					continue
 
-				if dname in skipsegs:
+				if not skipsegs==None and dname in skipsegs:
 					continue
 
 				dpath = os.path.join(path,dname)
-				skip = False
-				for skipdir in skipdirs:
-					if dpath==skipdir and args.retaintopdirs:
-						# dpath is the top-level folder to be skipped but command line
-						# option to retain the top-level folder in the final graph has
-						# been specified so allow this one into the graph...
-						break
-					elif dpath.startswith(skipdir):
-						# ...below a folder in the skipdirs list so don't let it into
-						# the graph...
-						skip = True
-						#print '...skipping (<'+skipdir+'>)'
-						break
-				if skip:
-					continue
+				if not skipdirs==None:
+					skip = False
+					for skipdir in skipdirs:
+						if dpath==skipdir and args.retaintopdirs:
+							# dpath is the top-level folder to be skipped but command line
+							# option to retain the top-level folder in the final graph has
+							# been specified so allow this one into the graph...
+							break
+						elif dpath.startswith(skipdir):
+							# ...below a folder in the skipdirs list so don't let it into
+							# the graph...
+							skip = True
+							#print '...skipping (<'+skipdir+'>)'
+							break
+					if skip:
+						continue
 
 				# If sub-graphs have been provided iterate the list and determine if
 				# this folder lies within the top-level subgraph folder. If we are
@@ -216,7 +217,6 @@ def processtree(treename, subgraphs, phase):
 				# normal...
 				if not subgraphs==None:
 					insubgraph = False
-					dpath = os.path.join(path,dname)
 					for subgraph in subgraphs:
 						insubgraph = dpath.startswith(subgraph['path'])
 						#insubgraph = dpath.startswith(subgraph)
@@ -259,13 +259,14 @@ def processtree(treename, subgraphs, phase):
 					if fname in skipfiles:
 						continue
 
-					skip = False
-					for skipdir in skipdirs:
-						if path.startswith(skipdir):
-							skip = True
-							break
-					if skip:
-						continue
+					if not skipdirs==None:
+						skip = False
+						for skipdir in skipdirs:
+							if path.startswith(skipdir):
+								skip = True
+								break
+						if skip:
+							continue
 
 					# ...similarly sub-graphs have been provided so iterate the list and
 					# determine if this file lies within the top-level subgraph folder. If we are
@@ -371,9 +372,8 @@ def check_parameters(argv):
 	args.redfiles = redfiles.split(',')
 
 	skipdirs = args.skipdirs
-	if skipdirs==None:
-		skipdirs = ''
-	args.skipdirs = skipdirs.split(',')
+	if not skipdirs==None:
+		args.skipdirs = skipdirs.split(',')
 
 	skipfiles = args.skipfiles
 	if skipfiles==None:
@@ -381,9 +381,8 @@ def check_parameters(argv):
 	args.skipfiles = skipfiles.split(',')
 
 	skipsegs = args.skipsegs
-	if skipsegs==None:
-		skipsegs = ''
-	args.skipsegs = skipsegs.split(',')
+	if not skipsegs==None:
+		args.skipsegs = skipsegs.split(',')
 
 	return args
 
